@@ -1,0 +1,24 @@
+Package: MultiOmicQC
+Type: Package
+Title: Quality control for Multi-omics datasets
+Authors@R: c(
+    person("Marcel", "Ramos", email = "marcel.ramos@roswellpark.org",
+    role = "cre"))
+Description: This package provides functions for quality control of 
+    Multi-omics datasets.
+Version: 0.0.1
+Depends: R (>= 3.4.2),
+    MultiAssayExperiment
+Import:
+    methods,
+    GenomeInfoDb
+Suggests:
+    rmarkdown,
+    knitr,
+    BiocStyle,
+    testthat
+License: Artistic-2.0
+VignetteBuilder: knitr
+Encoding: UTF-8
+LazyData: true
+
