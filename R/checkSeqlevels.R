@@ -1,23 +1,26 @@
-.hasRanges <- function(object) {
-is(object, "RangedSummarizedExperiment") ||
-    is(object, "RaggedExperiment")
-}
-
 #' Ensure that all seqlevel styles match across experiments
+#'
+#' @importFrom MultiAssayExperiment hasRowRanges
+#' @importFrom IRanges CharacterList
+#' @importFrom DelayedArray rowRanges
+#' @importFrom Biobase selectSome
+#' @importFrom GenomeInfoDb seqlevelsStyle
 #'
 #' @param x A \linkS4class{MultiAssayExperiment}
 #' @export
 checkSeqlevels <- function(x) {
     exps <- experiments(x)
-    rangedExp <- vapply(exps, .hasRanges, logical(1L))
+    hasRR <- hasRowRanges(exps)
 
-    seqlvls <- lapply(exps[rangedExp], function(y) {
-        seqlevelsStyle(rowRanges(y))
+    seqlvls <- lapply(exps[hasRR], function(y) {
+        GenomeInfoDb::seqlevelsStyle(rowRanges(y))
     })
-    allStyles <- Reduce(identical, seqlvls)
-    if (!allStyles) {
-    warning("Inconsistent 'seqlevelsStyle' formats found")
-    ## Report mismatches here
+    if (length(seqlvls) == 1L) { return(TRUE) }
+    allConsistent <- sum(duplicated(seqlvls)) == length(seqlvls)-1L
+    if (!allConsistent) {
+    warning("Inconsistent 'seqlevelsStyle' formats found:\n",
+    "    ", Biobase::selectSome(paste(unlist(seqlvls[!duplicated(seqlvls)]),
+        collapse = ", ")))
     }
-    allStyles
+    allConsistent
 }
