@@ -9,8 +9,7 @@
 #' @param x A \linkS4class{MultiAssayExperiment}
 #' @export
 checkSeqlevels <- function(x) {
-    exps <- experiments(x)
-    hasRR <- hasRowRanges(exps)
+    hasRR <- hasRowRanges(x)
 
     seqlvls <- lapply(exps[hasRR], function(y) {
         GenomeInfoDb::seqlevelsStyle(rowRanges(y))
