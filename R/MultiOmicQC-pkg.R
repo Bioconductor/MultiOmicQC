@@ -2,7 +2,7 @@
 #' @importFrom IRanges CharacterList
 #' @importFrom DelayedArray rowRanges
 #' @importFrom Biobase selectSome
-#' @importFrom GenomeInfoDb seqlevelsStyle seqlevels
+#' @importFrom GenomeInfoDb seqlevelsStyle seqlevels seqlengths
 #' @importFrom stats reshape kmeans
 #' @importFrom S4Vectors DataFrame
 NULL
