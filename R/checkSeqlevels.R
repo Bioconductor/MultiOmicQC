@@ -1,25 +1,30 @@
-#' Ensure that all seqlevel styles match across experiments
+#' Ensure uniform seqnames across experiments
 #'
-#' @importFrom MultiAssayExperiment hasRowRanges
-#' @importFrom IRanges CharacterList
-#' @importFrom DelayedArray rowRanges
-#' @importFrom Biobase selectSome
-#' @importFrom GenomeInfoDb seqlevelsStyle
+#' This function checks seqnames of all ranged experiments for
+#' consistency. This can become problematic when ranged experiments are
+#' not using identical seqnames.
 #'
 #' @param x A \linkS4class{MultiAssayExperiment}
+#'
 #' @export
 checkSeqlevels <- function(x) {
-    hasRR <- hasRowRanges(x)
+    .consistencyChecker(x, "seqlevels", seqlevels)
+}
 
-    seqlvls <- lapply(exps[hasRR], function(y) {
-        GenomeInfoDb::seqlevelsStyle(rowRanges(y))
+
+.consistencyChecker <- function(x, name, FUN) {
+    hasRR <- hasRowRanges(x)
+    exps <- experiments(x)
+
+    funList <- lapply(exps[hasRR], function(y) {
+        FUN(rowRanges(y))
     })
-    if (length(seqlvls) == 1L) { return(TRUE) }
-    allConsistent <- sum(duplicated(seqlvls)) == length(seqlvls)-1L
+    if (length(funList) == 1L) { return(TRUE) }
+    allConsistent <- all(duplicated(funList)[-1L])
     if (!allConsistent) {
-    warning("Inconsistent 'seqlevelsStyle' formats found:\n",
-    "    ", Biobase::selectSome(paste(unlist(seqlvls[!duplicated(seqlvls)]),
-        collapse = ", ")))
+        warning("Inconsistent '", name, "' found:\n",
+            "    ", Biobase::selectSome(paste(
+                unlist(funList[!duplicated(funList)]), collapse = ", ")))
     }
     allConsistent
 }

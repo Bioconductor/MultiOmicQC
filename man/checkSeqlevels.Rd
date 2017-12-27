@@ -2,7 +2,7 @@
 % Please edit documentation in R/checkSeqlevels.R
 \name{checkSeqlevels}
 \alias{checkSeqlevels}
-\title{Ensure that all seqlevel styles match across experiments}
+\title{Ensure uniform seqnames across experiments}
 \usage{
 checkSeqlevels(x)
 }
@@ -10,5 +10,7 @@ checkSeqlevels(x)
 \item{x}{A \linkS4class{MultiAssayExperiment}}
 }
 \description{
-Ensure that all seqlevel styles match across experiments
+This function checks seqnames of all ranged experiments for
+consistency. This can become problematic when ranged experiments are
+not using identical seqnames.
 }
