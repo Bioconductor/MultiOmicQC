@@ -10,4 +10,9 @@ additional to the checks already established in MultiAssayExperiment.
 \author{
 \strong{Maintainer}: Marcel Ramos \email{marcel.ramos@roswellpark.org}
 
+Other contributors:
+\itemize{
+  \item MultiAssay SIG \email{biocmultiassay@googlegroups.com} [contributor]
+}
+
 }
