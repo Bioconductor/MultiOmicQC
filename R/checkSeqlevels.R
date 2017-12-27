@@ -1,10 +1,4 @@
-#' Ensure uniform seqnames across experiments
-#'
-#' This function checks seqnames of all ranged experiments for
-#' consistency. This can become problematic when ranged experiments are
-#' not using identical seqnames.
-#'
-#' @param x A \linkS4class{MultiAssayExperiment}
+#' @name MultiOmicQC-checkers
 #'
 #' @export
 checkSeqlevels <- function(x) {
@@ -13,6 +7,8 @@ checkSeqlevels <- function(x) {
 
 
 .consistencyChecker <- function(x, name, FUN) {
+    if (!is(x, "MultiAssayExperiment"))
+        stop("Provide a 'MultiAssayExperiment' object")
     hasRR <- hasRowRanges(x)
     exps <- experiments(x)
 
