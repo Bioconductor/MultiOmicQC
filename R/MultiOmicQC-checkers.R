@@ -22,3 +22,10 @@
 checkSeqlengths <- function(x) {
     .consistencyChecker(x, "seqlengths", seqlengths)
 }
+
+#' @name MultiOmicQC-checkers
+#'
+#' @export
+checkSeqlevelsStyle <- function(x) {
+    .consistencyChecker(x, "seqlevelsStyle", seqlevelsStyle)
+}
