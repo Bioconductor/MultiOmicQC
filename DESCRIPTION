@@ -3,10 +3,12 @@ Type: Package
 Title: Quality control for Multi-omics datasets
 Authors@R: c(
     person("Marcel", "Ramos", email = "marcel.ramos@roswellpark.org",
-    role = "cre"))
+    role = c("aut", "cre")),
+    person("MultiAssay", "SIG", email = "biocmultiassay@googlegroups.com",
+    role = "ctb"))
 Description: This package provides functions for quality control of 
     Multi-omics datasets.
-Version: 0.0.5
+Version: 0.0.6
 Depends: R (>= 3.4.2),
     MultiAssayExperiment (>= 1.5.37)
 Import:
@@ -14,7 +16,8 @@ Import:
     methods,
     DelayedArray,
     GenomeInfoDb,
-    IRanges
+    IRanges,
+    stats
 Suggests:
     rmarkdown,
     knitr,

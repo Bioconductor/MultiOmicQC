@@ -3,6 +3,8 @@
 #' @importFrom DelayedArray rowRanges
 #' @importFrom Biobase selectSome
 #' @importFrom GenomeInfoDb seqlevelsStyle seqlevels
+#' @importFrom stats reshape kmeans
+#' @importFrom S4Vectors DataFrame
 NULL
 
 #' MultiOmicQC: Helper functions for checking the integrity of Multi-omics datasets

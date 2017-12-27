@@ -2,9 +2,13 @@
 
 export(checkSeqlevels)
 export(checkSeqlevelsStyle)
+export(clusterOn)
 importFrom(Biobase,selectSome)
 importFrom(DelayedArray,rowRanges)
 importFrom(GenomeInfoDb,seqlevels)
 importFrom(GenomeInfoDb,seqlevelsStyle)
 importFrom(IRanges,CharacterList)
 importFrom(MultiAssayExperiment,hasRowRanges)
+importFrom(S4Vectors,DataFrame)
+importFrom(stats,kmeans)
+importFrom(stats,reshape)
