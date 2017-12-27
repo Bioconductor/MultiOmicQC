@@ -48,15 +48,13 @@ checkSeqlengths <- function(x) {
 #' @rdname MultiOmicQC-checkers
 #'
 #' @export
-checkSeqlevelsStyle <- function(x) {
-    .consistencyChecker(x, "seqlevelsStyle", seqlevelsStyle)
+checkSeqlevels <- function(x) {
+    .consistencyChecker(x, "seqlevels", seqlevels)
 }
 
 #' @rdname MultiOmicQC-checkers
 #'
 #' @export
-checkSeqlevels <- function(x) {
-    .consistencyChecker(x, "seqlevels", seqlevels)
+checkSeqlevelsStyle <- function(x) {
+    .consistencyChecker(x, "seqlevelsStyle", seqlevelsStyle)
 }
-
-
