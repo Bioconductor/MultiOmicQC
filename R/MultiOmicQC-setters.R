@@ -11,7 +11,7 @@
     BiocGenerics:::replaceSlots(x, ExperimentList = exps, check = FALSE)
 }
 
-#' @rdname MultiOmicQC-setters
+#' @name MultiOmicQC-setters
 #'
 #' @title Utility functions for setting metadata in MultiAssayExperiment
 #'
@@ -19,6 +19,14 @@
 #' @param style A character vector with a single element to specify the style
 #'
 #' @export
-setSeqlevelsStyle <- function(x, style) {
-    .setter(x, "seqlevelsStyle", GenomeInfoDb::`seqlevelsStyle<-`, style)
-}
+setReplaceMethod("seqlevelsStyle", "MultiAssayExperiment", function(x, value) {
+    .setter(x, "seqlevelsStyle", GenomeInfoDb::`seqlevelsStyle<-`, value)
+})
+
+
+#' @rdname MultiOmicQC-setters
+#' @aliases `genome<-`
+#' @export
+setReplaceMethod("genome", "MultiAssayExperiment", function(x, value) {
+    .setter(x, "genome", GenomeInfoDb::`genome<-`, value)
+})
