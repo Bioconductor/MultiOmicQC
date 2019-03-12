@@ -1,3 +1,13 @@
+.printInconsistent <- function(charList) {
+    paste(
+        vapply(seq_along(charList), function(i, string) {
+            paste0(names(string)[[i]], ": ",
+                paste(Biobase::selectSome(string[[i]], 5L), collapse = ", ")
+            )
+        }, character(1L), string = charList)
+    , collapse = "\n    ")
+}
+
 .consistencyChecker <- function(x, name, FUN) {
     if (!is(x, "MultiAssayExperiment"))
         stop("Provide a 'MultiAssayExperiment' object")
@@ -10,9 +20,11 @@
     if (length(funList) == 1L) { return(TRUE) }
     allConsistent <- all(duplicated(funList)[-1L])
     if (!allConsistent) {
-        warning("Inconsistent '", name, "' found:\n",
-            "    ", Biobase::selectSome(paste(
-                unlist(funList[!duplicated(funList)]), collapse = ", ")))
+        inconList <- funList[!duplicated(funList)]
+        warning(
+            "Inconsistent '", name, "' found:\n", "    ",
+            .printInconsistent(inconList)
+        )
     }
     allConsistent
 }
