@@ -2,7 +2,7 @@ Package: MultiOmicQC
 Type: Package
 Title: Quality control for Multi-omics datasets
 Authors@R: c(
-    person("Marcel", "Ramos", email = "marcel.ramos@roswellpark.org",
+    person("Marcel", "Ramos", email = "marcel.ramos@sph.cuny.edu",
     role = c("aut", "cre")),
     person("MultiAssay", "SIG", email = "biocmultiassay@googlegroups.com",
     role = "ctb"))
