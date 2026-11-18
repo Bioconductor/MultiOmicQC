@@ -4,13 +4,15 @@
 
 data("miniACC", package = "MultiAssayExperiment", envir = environment())
 
-makeRanged <- function(chrs, seqlengths = NULL) {
+makeRanged <- function(chrs, seqlengths = NULL, genome = NULL) {
     cn <- colnames(miniACC)[["RNASeq2GeneNorm"]]
     gr <- GenomicRanges::GRanges(
         chrs, IRanges::IRanges(seq_along(chrs), width = 1L)
     )
     if (!is.null(seqlengths))
-        GenomeInfoDb::seqlengths(gr) <- seqlengths
+        Seqinfo::seqlengths(gr) <- seqlengths
+    if (!is.null(genome))
+        Seqinfo::genome(gr) <- genome
     SummarizedExperiment::SummarizedExperiment(
         matrix(0, nrow = length(chrs), ncol = length(cn),
             dimnames = list(NULL, cn)),

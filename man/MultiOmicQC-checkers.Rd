@@ -2,61 +2,100 @@
 % Please edit documentation in R/MultiOmicQC-checkers.R
 \name{MultiOmicQC-checkers}
 \alias{MultiOmicQC-checkers}
-\alias{checkSeqlengths}
 \alias{checkSeqlevels}
+\alias{checkSeqlengths}
 \alias{checkSeqlevelsStyle}
-\title{Check seqinfo consistency across ranged experiments}
+\alias{checkGenome}
+\title{Check seqinfo compatibility across ranged experiments}
 \usage{
+checkSeqlevels(x, exact = FALSE)
+
 checkSeqlengths(x)
 
-checkSeqlevels(x)
-
 checkSeqlevelsStyle(x)
+
+checkGenome(x)
 }
 \arguments{
 \item{x}{A \linkS4class{MultiAssayExperiment}}
+
+\item{exact}{\code{logical(1)} Whether all ranged experiments must have
+the same set of seqlevels (default \code{FALSE}).}
 }
 \value{
-A single logical: \code{TRUE} when all ranged experiments agree
-(or when there are fewer than two ranged experiments), \code{FALSE}
-otherwise. When \code{FALSE}, a warning lists the inconsistent values.
+A single logical: \code{TRUE} when the ranged experiments are
+compatible (or when there are fewer than two ranged experiments to
+compare), \code{FALSE} otherwise. When \code{FALSE}, a warning describes
+the conflicts.
 }
 \description{
-A set of functions to check several aspects of ranged
-experiments including \code{seqlengths}, \code{seqlevels} and
-\code{seqlevelsStyle}. These group of functions return a logical scalar
-value when the names, styles, etc. are consistent accross all experiments.
-}
-\section{checkSeqlengths}{
+A set of functions that check whether the genomic
+annotations (\code{seqinfo}) of the ranged experiments in a
+\linkS4class{MultiAssayExperiment} are compatible with each other.
+Only experiments with row ranges (see
+\code{\link[MultiAssayExperiment]{hasRowRanges}}) are checked.
 
-Runs and checks \code{seqlengths} on all ranged experiments.
+The checks follow the rules of \code{merge()} for \code{Seqinfo}
+objects: differences in seqlevel order, experiments covering only some of
+the seqlevels, and unknown (\code{NA}) seqlengths or genomes are
+compatible. Conflicting known values are not.
 }
-
 \section{checkSeqlevels}{
 
-Checks \code{seqnames} levels of all ranged experiments for
-consistency. Inconsistent seqlevels can be problematic when ranged
-experiments differ by annotations.
+By default (\code{exact = FALSE}), fails when two ranged experiments
+have no seqlevels in common, which usually points to a naming style or
+genome build mismatch. The order of seqlevels and experiments that
+cover a subset of the seqlevels (e.g., no \code{chrY}) are accepted.
+With \code{exact = TRUE}, fails unless all experiments have the same set
+of seqlevels (in any order); the warning lists the seqlevels missing from
+each experiment.
+}
+
+\section{checkSeqlengths}{
+
+Fails when a seqlevel shared by two or more experiments has different
+known lengths. Unknown (\code{NA}) lengths are ignored.
 }
 
 \section{checkSeqlevelsStyle}{
 
-Checks all \code{seqlevelsStyle} of all ranged experiments by comparing
-the first style with the rest using the \code{duplicated} function.
+Fails when the ranged experiments have no naming style (e.g., "UCSC" or
+"NCBI") in common. An experiment can match several styles (e.g.,
+\code{c("1", "2")} matches both "NCBI" and "Ensembl"). Experiments whose
+style cannot be determined are skipped.
+}
+
+\section{checkGenome}{
+
+Fails when the ranged experiments report more than one genome build
+(e.g., "hg19" and "hg38"). Unknown (\code{NA}) genomes are ignored.
+Unlike \code{merge()}, genomes are compared even when the experiments
+share no seqlevels.
 }
 
 \examples{
 library(GenomicRanges)
 data(miniACC, package = "MultiAssayExperiment")
 cn <- colnames(miniACC)[["RNASeq2GeneNorm"]]
-makeRanged <- function(chrs) SummarizedExperiment::SummarizedExperiment(
-    matrix(0, nrow = length(chrs), ncol = length(cn),
-        dimnames = list(NULL, cn)),
-    rowRanges = GRanges(chrs, IRanges(seq_along(chrs), width = 1))
-)
-mae <- c(miniACC, cnA = makeRanged(c("chr1", "chr2")),
-    cnB = makeRanged(c("1", "2")), mapFrom = c(1L, 1L))
+makeRanged <- function(chrs, genome = NA) {
+    gr <- GRanges(chrs, IRanges(seq_along(chrs), width = 1))
+    genome(gr) <- genome
+    SummarizedExperiment::SummarizedExperiment(
+        matrix(0, nrow = length(chrs), ncol = length(cn),
+            dimnames = list(NULL, cn)),
+        rowRanges = gr
+    )
+}
+mae <- c(miniACC,
+    cnA = makeRanged(c("chr1", "chr2", "chrX"), "hg19"),
+    cnB = makeRanged(c("chr2", "chr1"), "hg38"),
+    mapFrom = c(1L, 1L))
+## compatible: different order and cnB lacks chrX
 checkSeqlevels(mae)
 checkSeqlevelsStyle(mae)
+## not identical sets
+checkSeqlevels(mae, exact = TRUE)
+## hg19 vs hg38
+checkGenome(mae)
 
 }

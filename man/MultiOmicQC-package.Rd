@@ -20,11 +20,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Marcel Ramos \email{marcel.ramos@roswellpark.org}
+\strong{Maintainer}: Marcel Ramos \email{marcel.ramos@sph.cuny.edu}
 
 Authors:
 \itemize{
-  \item Marcel Ramos \email{marcel.ramos@roswellpark.org}
+  \item Marcel Ramos \email{marcel.ramos@sph.cuny.edu}
 }
 
 Other contributors:

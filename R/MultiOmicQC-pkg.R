@@ -2,11 +2,12 @@
 #'     longForm
 #' @importFrom SummarizedExperiment rowRanges
 #' @importFrom GenomeInfoDb seqlevelsStyle seqlevelsStyle<-
-#' @importFrom Seqinfo seqlevels seqlengths genome<-
+#' @importFrom Seqinfo seqinfo seqlevels seqlengths genome genome<-
 #' @importFrom stats reshape kmeans
 #' @importFrom S4Vectors DataFrame
 #' @importFrom methods is
-#' @importFrom BiocBaseUtils selectSome
+#' @importFrom BiocBaseUtils selectSome isTRUEorFALSE
+#' @importFrom utils combn
 NULL
 
 #' MultiOmicQC: Helper functions for checking the integrity of Multi-omics

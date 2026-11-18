@@ -8,11 +8,11 @@ Authors@R: c(
     role = "ctb"))
 Description: This package provides functions for quality control of
     multi-omics datasets represented as MultiAssayExperiment objects.
-    It checks the consistency of genomic annotations, such as seqlevels,
-    seqlengths, and seqlevelsStyle, across ranged experiments and
-    provides helpers for harmonizing them. Sample-level helpers, such as
-    clustering on marker features, support checks of sample identity
-    against clinical annotations.
+    It checks the compatibility of genomic annotations, such as seqlevels,
+    seqlengths, seqlevelsStyle, and genome builds, across ranged
+    experiments and provides helpers for harmonizing them. Sample-level
+    helpers, such as clustering on marker features, support checks of
+    sample identity against clinical annotations.
 Depends: R (>= 4.6.0),
     MultiAssayExperiment
 Imports:
@@ -22,7 +22,8 @@ Imports:
     Seqinfo,
     stats,
     S4Vectors,
-    SummarizedExperiment
+    SummarizedExperiment,
+    utils
 Suggests:
     BiocStyle,
     GenomicRanges,
