@@ -1,0 +1,13 @@
+## Protein & Gene Expression Correlation QC
+
+- [] Implement function to calculate correlations between protein and gene expression levels.
+- [] Establish a null distribution comparison for correlation metrics.
+- [] Integrate gene mapping via UniProt.ws.
+
+## Sex Verification QC
+
+- [] Incorporate sex quality control checks using gene expression data (based on Carmen's method).
+
+## Duplicate Identification
+
+- [] Develop an extension for DoppelgangR to check for duplicate entries in sample metadata (colData).
