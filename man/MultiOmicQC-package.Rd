@@ -2,13 +2,30 @@
 % Please edit documentation in R/MultiOmicQC-pkg.R
 \docType{package}
 \name{MultiOmicQC-package}
-\title{MultiOmicQC: Helper functions for checking the integrity of Multi-omics datasets}
+\alias{MultiOmicQC}
+\alias{MultiOmicQC-package}
+\title{MultiOmicQC: Helper functions for checking the integrity of Multi-omics
+datasets}
 \description{
-MultiOmicQC allows the user to run common checks on MultiAssayExperiment objects
-additional to the checks already established in MultiAssayExperiment.
+MultiOmicQC allows the user to run common checks on MultiAssayExperiment
+objects additional to the checks already established in
+MultiAssayExperiment.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Bioconductor/MultiOmicQC}
+  \item Report bugs at \url{https://github.com/Bioconductor/MultiOmicQC/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Marcel Ramos \email{marcel.ramos@roswellpark.org}
+
+Authors:
+\itemize{
+  \item Marcel Ramos \email{marcel.ramos@roswellpark.org}
+}
 
 Other contributors:
 \itemize{

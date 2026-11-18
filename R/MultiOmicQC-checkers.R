@@ -2,7 +2,7 @@
     paste(
         vapply(seq_along(charList), function(i, string) {
             paste0(names(string)[[i]], ": ",
-                paste(Biobase::selectSome(string[[i]], 5L), collapse = ", ")
+                paste(selectSome(string[[i]], 5L), collapse = ", ")
             )
         }, character(1L), string = charList)
     , collapse = "\n    ")

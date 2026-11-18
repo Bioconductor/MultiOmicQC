@@ -6,25 +6,35 @@ Authors@R: c(
     role = c("aut", "cre")),
     person("MultiAssay", "SIG", email = "biocmultiassay@googlegroups.com",
     role = "ctb"))
-Description: This package provides functions for quality control of 
-    Multi-omics datasets.
+Description: This package provides functions for quality control of
+    multi-omics datasets represented as MultiAssayExperiment objects.
+    It checks the consistency of genomic annotations, such as seqlevels,
+    seqlengths, and seqlevelsStyle, across ranged experiments and
+    provides helpers for harmonizing them. Sample-level helpers, such as
+    clustering on marker features, support checks of sample identity
+    against clinical annotations.
 Version: 0.0.14
-Depends: R (>= 3.4.2),
-    MultiAssayExperiment (>= 1.5.37)
-Import:
-    Biobase,
-    methods,
-    DelayedArray,
+Depends: R (>= 4.6.0),
+    MultiAssayExperiment (>= 1.35.0)
+Imports:
+    BiocBaseUtils,
     GenomeInfoDb,
-    IRanges,
-    stats
+    methods,
+    Seqinfo,
+    stats,
+    S4Vectors,
+    SummarizedExperiment
 Suggests:
-    rmarkdown,
-    knitr,
     BiocStyle,
-    testthat
+    GenomicRanges,
+    IRanges,
+    knitr,
+    rmarkdown,
+    tinytest
+biocViews: QualityControl, Software, DataRepresentation, Infrastructure,
+    GeneExpression, Clustering
 License: Artistic-2.0
-VignetteBuilder: knitr
+URL: https://github.com/Bioconductor/MultiOmicQC
+BugReports: https://github.com/Bioconductor/MultiOmicQC/issues
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 6.1.1
+Config/roxygen2/version: 8.1.1

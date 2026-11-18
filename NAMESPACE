@@ -6,13 +6,26 @@ export(checkSeqlevelsStyle)
 export(clusterOn)
 exportMethods("genome<-")
 exportMethods("seqlevelsStyle<-")
-importFrom(Biobase,selectSome)
-importFrom(DelayedArray,rowRanges)
-importFrom(GenomeInfoDb,seqlengths)
-importFrom(GenomeInfoDb,seqlevels)
-importFrom(GenomeInfoDb,seqlevelsStyle)
-importFrom(IRanges,CharacterList)
-importFrom(MultiAssayExperiment,hasRowRanges)
+importFrom(BiocBaseUtils,selectSome)
+importFrom(GenomeInfoDb,
+  "seqlevelsStyle<-",
+  seqlevelsStyle
+)
+importFrom(MultiAssayExperiment,
+  "experiments<-",
+  experiments,
+  hasRowRanges,
+  longForm
+)
 importFrom(S4Vectors,DataFrame)
-importFrom(stats,kmeans)
-importFrom(stats,reshape)
+importFrom(Seqinfo,
+  "genome<-",
+  seqlengths,
+  seqlevels
+)
+importFrom(SummarizedExperiment,rowRanges)
+importFrom(methods,is)
+importFrom(stats,
+  kmeans,
+  reshape
+)
