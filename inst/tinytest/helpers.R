@@ -33,3 +33,34 @@ addRanged <- function(...) {
 }
 
 quietly <- function(expr) suppressMessages(suppressWarnings(expr))
+
+## Simulated sex marker expression (counts) for the RNASeq2GeneNorm samples.
+## 'sexes' gives the true sex of each sample (defaults to the reported
+## gender); 'lossOfY' names samples with low Y-gene expression.
+makeSexGenes <- function(sexes = NULL, lossOfY = character()) {
+    samples <- colnames(miniACC)[["RNASeq2GeneNorm"]]
+    smap <- sampleMap(miniACC)
+    primary <- smap$primary[match(samples, smap$colname)]
+    if (is.null(sexes))
+        sexes <- miniACC$gender[match(primary, rownames(colData(miniACC)))]
+    isMale <- sexes == "male"
+    jitter <- 0.3 * sin(seq_along(samples))
+    expr <- rbind(
+        XIST = ifelse(isMale, 1, 10) + jitter,
+        RPS4Y1 = ifelse(isMale, 11, 1) + jitter,
+        DDX3Y = ifelse(isMale, 9, 0.5) - jitter,
+        KDM5D = ifelse(isMale, 8, 0.5) + jitter / 2,
+        ACTB = 12 + jitter
+    )
+    colnames(expr) <- samples
+    yGenes <- c("RPS4Y1", "DDX3Y", "KDM5D")
+    expr[yGenes, lossOfY] <- expr[yGenes, lossOfY] - 8
+    2^expr - 1
+}
+
+## Add 'data' (by default simulated counts) as the 'sexGenes' experiment
+addSexGenes <- function(..., data = makeSexGenes(...)) {
+    suppressWarnings(
+        c(miniACC, sexGenes = data, mapFrom = "RNASeq2GeneNorm")
+    )
+}

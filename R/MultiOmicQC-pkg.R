@@ -1,12 +1,12 @@
 #' @importFrom MultiAssayExperiment hasRowRanges experiments experiments<-
-#'     longForm
-#' @importFrom SummarizedExperiment rowRanges
+#'     sampleMap
+#' @importFrom SummarizedExperiment rowRanges assay colData
 #' @importFrom GenomeInfoDb seqlevelsStyle seqlevelsStyle<-
 #' @importFrom Seqinfo seqinfo seqlevels seqlengths genome genome<-
-#' @importFrom stats reshape kmeans
-#' @importFrom S4Vectors DataFrame
+#' @importFrom stats median sd
+#' @importFrom S4Vectors DataFrame metadata metadata<-
 #' @importFrom methods is
-#' @importFrom BiocBaseUtils selectSome isTRUEorFALSE
+#' @importFrom BiocBaseUtils selectSome isTRUEorFALSE isScalarCharacter
 #' @importFrom utils combn
 NULL
 

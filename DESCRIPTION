@@ -11,8 +11,8 @@ Description: This package provides functions for quality control of
     It checks the compatibility of genomic annotations, such as seqlevels,
     seqlengths, seqlevelsStyle, and genome builds, across ranged
     experiments and provides helpers for harmonizing them. Sample-level
-    helpers, such as clustering on marker features, support checks of
-    sample identity against clinical annotations.
+    helpers compare the reported sex of each sample with the expression
+    of sex-specific marker genes.
 Depends: R (>= 4.6.0),
     MultiAssayExperiment
 Imports:
@@ -32,7 +32,7 @@ Suggests:
     rmarkdown,
     tinytest
 biocViews: QualityControl, Software, DataRepresentation, Infrastructure,
-    GeneExpression, Clustering
+    GeneExpression
 License: Artistic-2.0
 URL: https://github.com/Bioconductor/MultiOmicQC
 BugReports: https://github.com/Bioconductor/MultiOmicQC/issues
