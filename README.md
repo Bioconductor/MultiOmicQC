@@ -10,7 +10,7 @@ Given two or more datasets on genomic intervals or with genomic build informatio
 - [x] Check genome builds match (e.g., hg19 vs hg38) — `checkGenome()`
 
 ## Sample level checks
-- [ ] Sex prediction
+- [x] Sex check against marker gene expression — `checkSex()`
 - [ ] Population prediction (genetic data)
 
 ## Dataset-level checks

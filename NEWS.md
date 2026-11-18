@@ -2,11 +2,17 @@
 
 ## NEW FEATURES
 
+- `checkSex()` compares the reported sex in `colData` with the expression
+  of sex-specific marker genes (XIST and Y-chromosome genes) and flags
+  mismatched and ambiguous samples, such as male tumors that have lost
+  chromosome Y expression.
 - `checkGenome()` reports ranged experiments with different genome builds
   (e.g., hg19 and hg38), even when they share no seqlevels.
 
 ## SIGNIFICANT USER-VISIBLE CHANGES
 
+- `clusterOn()` is removed; use `checkSex()` to check reported sex against
+  marker gene expression.
 - The seqinfo checkers test compatibility rather than identity, following
   the rules of `merge()` for `Seqinfo` objects:
   - `checkSeqlevels()` ignores seqlevel order and accepts experiments that
@@ -24,8 +30,6 @@
 
 - The package loads again: the `seqlevelsStyle<-` and `genome<-` generics
   are now imported (from GenomeInfoDb and Seqinfo, respectively).
-- `clusterOn()` uses `longForm()`, replacing the defunct `longFormat()`, and
-  reports missing features with an informative error.
 - Fix the `Imports` field in `DESCRIPTION` (previously misspelled `Import`)
   and declare all dependencies.
 - Replace Biobase with the lighter BiocBaseUtils for `selectSome()`.
