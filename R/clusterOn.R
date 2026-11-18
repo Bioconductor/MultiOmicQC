@@ -1,8 +1,8 @@
 #' Check expression of a given feature against clinical variable
 #'
-#' Function that outputs a \link{DataFrame} with participant ID, sample ID,
-#' the select colData column, the expression values for select rownames,
-#' and the center values for each gene by cluster.
+#' Function that outputs a \link[S4Vectors]{DataFrame} with participant ID,
+#' sample ID, the select colData column, the expression values for select
+#' rownames, and the center values for each gene by cluster.
 #'
 #' @param MultiAssayExperiment A MultiAssayExperiment object
 #' @param colDataCols Select columns from the MultiAssayExperiment colData
@@ -15,18 +15,22 @@
 #'
 #' @return A DataFrame with appended cluster and center values
 #' @examples
-#' library(MultiAssayExperiment)
-#' example(MultiAssayExperiment)
-#' clusterOn(myMultiAssayExperiment, colDataCols = "sex",
-#'     rownames = c("XIST", "RPS4Y1", "KDM5D"),
-#'     experiments = "RNASeqGene", seed = 42L)
+#' data(miniACC, package = "MultiAssayExperiment")
+#' clusterOn(miniACC, colDataCols = "gender",
+#'     rownames = c("CDKN1B", "ERBB2", "G6PD"),
+#'     experiments = "RNASeq2GeneNorm", seed = 42L)
 #'
 #' @export clusterOn
 clusterOn <- function(MultiAssayExperiment, colDataCols, rownames,
     experiments, seed = NULL) {
     MultiAssayExperiment <- MultiAssayExperiment[rownames, , experiments]
-    longMulti <- longFormat(MultiAssayExperiment, colDataCols = colDataCols)
+    longMulti <- longForm(MultiAssayExperiment, colDataCols = colDataCols)
     longMulti <- as.data.frame(longMulti)[, names(longMulti) != "assay"]
+
+    missingRows <- setdiff(rownames, longMulti[["rowname"]])
+    if (length(missingRows))
+        stop("'rownames' not found in 'experiments': ",
+            paste(missingRows, collapse = ", "))
 
     wideMulti <- reshape(longMulti, direction = "wide", timevar = "rowname",
         idvar = "primary", v.names = "value")
