@@ -15,7 +15,7 @@ Description: This package provides functions for quality control of
     against clinical annotations.
 Version: 0.0.14
 Depends: R (>= 4.6.0),
-    MultiAssayExperiment (>= 1.35.0)
+    MultiAssayExperiment
 Imports:
     BiocBaseUtils,
     GenomeInfoDb,
