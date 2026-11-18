@@ -4,12 +4,13 @@
 Given two or more datasets on genomic intervals or with genomic build information:
 
 ### Simple sanity checks
-- [ ] Check seqlevels match (and report mismatches)
-- [ ] Check seqnames match (and report mismatches)
-- [ ] Check seqlengths (or max seqlengths)
+- [x] Check seqlevels match (and report mismatches) — `checkSeqlevels()`
+- [x] Check seqlevelsStyle match (and report mismatches) — `checkSeqlevelsStyle()`
+- [x] Check seqlengths (or max seqlengths) — `checkSeqlengths()`
+- [ ] Check genome builds match (e.g., hg19 vs hg38)
 
 ## Sample level checks
-- [ ] Gender prediction
+- [ ] Sex prediction
 - [ ] Population prediction (genetic data)
 
 ## Dataset-level checks
