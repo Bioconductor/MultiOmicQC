@@ -16,6 +16,11 @@ checkSeqlevelsStyle(x)
 \arguments{
 \item{x}{A \linkS4class{MultiAssayExperiment}}
 }
+\value{
+A single logical: \code{TRUE} when all ranged experiments agree
+(or when there are fewer than two ranged experiments), \code{FALSE}
+otherwise. When \code{FALSE}, a warning lists the inconsistent values.
+}
 \description{
 A set of functions to check several aspects of ranged
 experiments including \code{seqlengths}, \code{seqlevels} and
@@ -40,3 +45,18 @@ Checks all \code{seqlevelsStyle} of all ranged experiments by comparing
 the first style with the rest using the \code{duplicated} function.
 }
 
+\examples{
+library(GenomicRanges)
+data(miniACC, package = "MultiAssayExperiment")
+cn <- colnames(miniACC)[["RNASeq2GeneNorm"]]
+makeRanged <- function(chrs) SummarizedExperiment::SummarizedExperiment(
+    matrix(0, nrow = length(chrs), ncol = length(cn),
+        dimnames = list(NULL, cn)),
+    rowRanges = GRanges(chrs, IRanges(seq_along(chrs), width = 1))
+)
+mae <- c(miniACC, cnA = makeRanged(c("chr1", "chr2")),
+    cnB = makeRanged(c("1", "2")), mapFrom = c(1L, 1L))
+checkSeqlevels(mae)
+checkSeqlevelsStyle(mae)
+
+}

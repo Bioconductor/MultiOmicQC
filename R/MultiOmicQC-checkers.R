@@ -52,6 +52,24 @@
 #'
 #' @param x A \linkS4class{MultiAssayExperiment}
 #'
+#' @return A single logical: \code{TRUE} when all ranged experiments agree
+#' (or when there are fewer than two ranged experiments), \code{FALSE}
+#' otherwise. When \code{FALSE}, a warning lists the inconsistent values.
+#'
+#' @examples
+#' library(GenomicRanges)
+#' data(miniACC, package = "MultiAssayExperiment")
+#' cn <- colnames(miniACC)[["RNASeq2GeneNorm"]]
+#' makeRanged <- function(chrs) SummarizedExperiment::SummarizedExperiment(
+#'     matrix(0, nrow = length(chrs), ncol = length(cn),
+#'         dimnames = list(NULL, cn)),
+#'     rowRanges = GRanges(chrs, IRanges(seq_along(chrs), width = 1))
+#' )
+#' mae <- c(miniACC, cnA = makeRanged(c("chr1", "chr2")),
+#'     cnB = makeRanged(c("1", "2")), mapFrom = c(1L, 1L))
+#' checkSeqlevels(mae)
+#' checkSeqlevelsStyle(mae)
+#'
 #' @export
 checkSeqlengths <- function(x) {
     .consistencyChecker(x, "seqlengths", seqlengths)
