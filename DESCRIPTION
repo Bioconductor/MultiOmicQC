@@ -1,6 +1,6 @@
 Package: MultiOmicQC
-Type: Package
 Title: Quality control for Multi-omics datasets
+Version: 0.0.15
 Authors@R: c(
     person("Marcel", "Ramos", email = "marcel.ramos@sph.cuny.edu",
     role = c("aut", "cre")),
@@ -13,7 +13,6 @@ Description: This package provides functions for quality control of
     provides helpers for harmonizing them. Sample-level helpers, such as
     clustering on marker features, support checks of sample identity
     against clinical annotations.
-Version: 0.0.15
 Depends: R (>= 4.6.0),
     MultiAssayExperiment
 Imports:
