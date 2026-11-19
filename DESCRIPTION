@@ -1,6 +1,6 @@
 Package: MultiOmicQC
 Title: Quality control for Multi-omics datasets
-Version: 0.0.17
+Version: 0.0.18
 Authors@R: c(
     person("Marcel", "Ramos", email = "marcel.ramos@sph.cuny.edu",
     role = c("aut", "cre")),
