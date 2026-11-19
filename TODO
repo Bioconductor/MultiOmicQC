@@ -16,3 +16,10 @@
 ## Duplicate Identification
 
 - [] Develop an extension for DoppelgangR to check for duplicate entries in sample metadata (colData).
+
+## Bioconductor Submission
+
+- [] Add a vignette (BiocCheck error: no 'vignettes' directory), e.g., the
+  CPTAC ovarian workflow with `checkFeatureCorrelation()` and `checkSampleIdentity()`.
+- [] Remove `Remotes: waldronlab/CPTACdata` from DESCRIPTION once CPTACdata is on
+  Bioconductor (BiocCheck error: dependencies must be on CRAN or Bioconductor).
