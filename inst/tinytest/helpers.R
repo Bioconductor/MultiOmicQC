@@ -64,3 +64,21 @@ addSexGenes <- function(..., data = makeSexGenes(...)) {
         c(miniACC, sexGenes = data, mapFrom = "RNASeq2GeneNorm")
     )
 }
+
+## A second expression platform simulated from the RNA-seq data (log2 scale
+## plus noise), optionally with sample labels reordered by 'perm'
+makePlatform2 <- function(perm = NULL, sd = 1, seed = 123L) {
+    rna <- log2(SummarizedExperiment::assay(miniACC[["RNASeq2GeneNorm"]]) + 1)
+    set.seed(seed)
+    p2 <- rna + matrix(rnorm(length(rna), sd = sd), nrow(rna))
+    if (!is.null(perm))
+        p2 <- p2[, perm]
+    colnames(p2) <- colnames(rna)
+    p2
+}
+
+addPlatform2 <- function(...) {
+    suppressWarnings(
+        c(miniACC, platform2 = makePlatform2(...), mapFrom = "RNASeq2GeneNorm")
+    )
+}

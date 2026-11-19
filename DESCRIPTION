@@ -16,8 +16,10 @@ Description: This package provides functions for quality control of
 Depends: R (>= 4.6.0),
     MultiAssayExperiment
 Imports:
+    AnnotationDbi,
     BiocBaseUtils,
     GenomeInfoDb,
+    MatrixGenerics,
     methods,
     Seqinfo,
     stats,
@@ -26,13 +28,19 @@ Imports:
     utils
 Suggests:
     BiocStyle,
+    CPTACdata,
+    curatedTCGAData,
     GenomicRanges,
     IRanges,
     knitr,
+    org.Hs.eg.db,
     rmarkdown,
-    tinytest
+    TCGAutils,
+    tinytest,
+    UniProt.ws
 biocViews: QualityControl, Software, DataRepresentation, Infrastructure,
-    GeneExpression
+    GeneExpression, Proteomics
+Remotes: waldronlab/CPTACdata
 License: Artistic-2.0
 URL: https://github.com/Bioconductor/MultiOmicQC
 BugReports: https://github.com/Bioconductor/MultiOmicQC/issues
