@@ -2,6 +2,13 @@
 
 ## NEW FEATURES
 
+- `checkFeatureCorrelation()` correlates each feature shared by two
+  experiments, such as gene expression and protein abundance, across
+  matched patients, with empirical p-values from a permutation null.
+- `checkSampleIdentity()` checks that each patient's samples match across
+  two experiments and reports swapped and mismatched samples.
+- `mapFeatures()` maps the row names of an experiment, such as UniProt
+  accessions, to gene symbols with an `OrgDb` package or `UniProt.ws`.
 - `checkSex()` compares the reported sex in `colData` with the expression
   of sex-specific marker genes (XIST and Y-chromosome genes) and flags
   mismatched and ambiguous samples, such as male tumors that have lost

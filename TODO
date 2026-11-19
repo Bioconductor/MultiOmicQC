@@ -1,12 +1,17 @@
 ## Protein & Gene Expression Correlation QC
 
-- [] Implement function to calculate correlations between protein and gene expression levels.
-- [] Establish a null distribution comparison for correlation metrics.
-- [] Integrate gene mapping via UniProt.ws.
+- [x] Implement function to calculate correlations between protein and gene expression levels.
+  `checkFeatureCorrelation()`; `checkSampleIdentity()` uses them to find swapped samples.
+- [x] Establish a null distribution comparison for correlation metrics.
+  Permutation null (shuffled patient pairing) in `checkFeatureCorrelation()`.
+- [x] Integrate gene mapping via UniProt.ws.
+  `mapFeatures()` works with `UniProt.ws` or an `OrgDb` such as `org.Hs.eg.db`.
 
 ## Sex Verification QC
 
-- [] Incorporate sex quality control checks using gene expression data (based on Carmen's method).
+- [x] Incorporate sex quality control checks using gene expression data (based on Carmen's method).
+  Implemented as `checkSex()`, using an XIST / Y-chromosome marker score
+  calibrated on the reported sex (not Carmen's method, which was not documented).
 
 ## Duplicate Identification
 
